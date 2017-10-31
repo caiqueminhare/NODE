@@ -1,0 +1,114 @@
+{>"layout" /}
+{<body}
+        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#formModal">
+            Adicionar receita
+        </button>
+        <br/>
+
+<div id="formModal" class="modal fade">
+  <div class="modal-dialog" role="document">
+    <form method="post" action="/add">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Adicionar Receita</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+                <label>Nome</label>
+                <textarea class="form-control" name="nome"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Ingredientes</label>
+                <textarea class="form-control" name="ingredientes"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Direçoes</label>
+                <textarea class="form-control" name="dir"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" value="Salvar"/>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+    </form>
+  </div>
+</div>
+
+<div id="editFormModal" class="modal fade">
+  <div class="modal-dialog" role="document">
+    <form method="post" action="/edit"> 
+        <input type="hidden" id="edit-form-id" name="id" />
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Editar Receita</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+                <label>Nome</label>
+                <textarea class="form-control" name="nome" id="edit-form-nome"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Ingredientes</label>
+                <textarea class="form-control" name="ingredientes" id="edit-form-ingredientes"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Direçoes</label>
+                <textarea class="form-control" name="dir" id="edit-form-dir"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" value="Salvar"/>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+    </form>
+  </div>
+</div>
+
+        {#receitas}
+            <div class="card">
+                <div class="card-header">
+                    <h4>{nome} 
+                        <button class="btn btn-default float-right" data-toggle="collapse" href="#receitas_{id}" aria-expanded="false" aria-controls="receitas_{id}">
+                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                        </button>
+                    </h4>
+                </div>
+                <div class="card-block">
+                    <div class="collapse" id="receitas_{id}">
+                            <br />
+                            <br />
+                            <p><strong>Ingredientes: </strong>{ingredientes}</p>
+                            <p><strong>Passo a passo: </strong>{dir}</p>
+                            <br />
+                            <hr/>
+                        <button class="btn btn-default edit-recipe float-right" 
+                                data-toggle="modal" 
+                                data-target="#editFormModal"
+                                data-id="{id}"
+                                data-nome="{nome}"
+                                data-ingredientes = "{ingredientes}"
+                                data-dir = "{dir}"
+                                >
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </button>
+                        
+                        <button class="btn btn-danger delete-recipe float-right"
+                                data-id="{id}">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <br>
+        {/receitas}
+{/body}
+        
+        
